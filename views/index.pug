@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .container
+    h1 Welcome to #{title}
+    .form-group
+      a.btn.btn-lg.btn-primary.btn-block(href='/register') User Registration
+      a.btn.btn-lg.btn-primary.btn-block(href='/login') Sign in
+      a.btn.btn-lg.btn-primary.btn-block(href='/add-client') Client Registration
+      a.btn.btn-lg.btn-primary.btn-block(href='/oauth/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&client_id=892c937a544aae9240c17df5781d5ea9') Get Authorization Code
+
+
+
+
