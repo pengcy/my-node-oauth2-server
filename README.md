@@ -1,5 +1,5 @@
 # Note
-This is an example of OAuth2 server using the Node.js library [node-oauth2-server](https://github.com/oauthjs/node-oauth2-server). 
+This is an example of OAuth2 server using the Node.js library [node-oauth2-server](https://github.com/oauthjs/node-oauth2-server). This is a prototype for oauth2 demonstration purpose only.
 
 ## 1. Install mongodb
 ```
@@ -26,12 +26,12 @@ Password: aaaaaa
 http://localhost:3000/login
 
 
-## 5. Create a new client. This is similar to creating a new client/app on the developer's web console on Facebook, LinkedIn, Google, Twitter, etc.
+## 5. Create a new client.
 http://localhost:3000/add-client
 
 Redirect URI: http://localhost:3000/
 
-After the Register button is clicked, the browser will show the result from the server. Take note of the _id, clientId and clientSecret, and update them for the following steps.
+This is similar to creating a new client/app on the developer's web console on Facebook, LinkedIn, Google, Twitter, etc. After the Register button is clicked, the browser will show the result from the server. **Take note of the _id, clientId and clientSecret, and update them for the following steps.**
 ```
 {
   id: {
@@ -56,6 +56,7 @@ After the Register button is clicked, the browser will show the result from the 
 
 
 ## 6. Get access token by client id and client secret, with the grant type of client_credentials.
+Replace the value for client_id and client_secret and run it on the command line.
 ```
 curl -X POST \
   http://localhost:3000/oauth/token \
@@ -67,6 +68,7 @@ curl -X POST \
 
 
 ## 7. Get authorization code by providing an access token as a Bearer token in the header.
+The authorization code will be printed on the server stdout
 ```
 curl -X GET \
   'http://localhost:3000/oauth/authorize-by-token?response_type=code&client_id=8bc2f1f89853e538ebaf0008c2ef4aa2&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&state=randomString' \
@@ -75,12 +77,13 @@ curl -X GET \
 ```
 
 
-## 8. Get authorization code by asking the user to authorize. If Authorize is clicked, the auth code should show up as an url parameter value of code in the browser address bar.
-
+## 8. Get authorization code by asking the user to authorize. 
+If Authorize is clicked, the auth code should show up as an url parameter value of code in the browser address bar.
 http://localhost:3000/oauth/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&client_id=8bc2f1f89853e538ebaf0008c2ef4aa2
 
 
-## 9. Make a post request using curl to get the access token. Replace the auth code with the one obtained from the previous step.
+## 9. Make a post request using curl to get the access token.
+Replace the value of client_id, client_secret and auth code with the one obtained from the previous steps.
 ```
 curl -X POST \
   http://localhost:3000/oauth/token \
@@ -90,7 +93,8 @@ curl -X POST \
 ```
 
 
-## 10. Use the access token to get user object. The access token is passed to the server as a Bearer token in the header.
+## 10. Use the access token to get user object. 
+The access token is passed to the server as a Bearer token in the header.
 ```
 curl -X GET \
   http://localhost:3000/users \
